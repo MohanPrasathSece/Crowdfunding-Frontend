@@ -3,6 +3,7 @@ import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import { toast } from 'react-toastify';
 
+const API_URL = "https://crowdfunding-backend-2c2d.onrender.com/api";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -21,8 +22,8 @@ export const AuthProvider = ({ children }) => {
     // ensure no stale auth header for login request
     delete axios.defaults.headers.common['Authorization'];
     try {
-      console.log('Attempting to connect to backend at:', process.env.REACT_APP_API_URL);
-      const res = await axios.post(`${process.env.REACT_APP_API_URL}/auth/login`, { email, password }, { headers: {} });
+      console.log('Attempting to connect to backend at:', API_URL);
+      const res = await axios.post(`${API_URL}/auth/login`, { email, password }, { headers: {} });
       const t = res.data.token;
       setToken(t);
       setUser(jwtDecode(t));
@@ -50,8 +51,8 @@ export const AuthProvider = ({ children }) => {
     // remove any existing auth header so signup isn't blocked
     delete axios.defaults.headers.common['Authorization'];
     try {
-      console.log('Attempting to connect to backend at:', process.env.REACT_APP_API_URL);
-      await axios.post(`${process.env.REACT_APP_API_URL}/auth/register`, { name, email, password }, { headers: {} });
+      console.log('Attempting to connect to backend at:', API_URL);
+      await axios.post(`${API_URL}/auth/register`, { name, email, password }, { headers: {} });
       toast.success('Signup successful, please login');
       console.log('Successfully connected to backend');
     } catch (err) {
