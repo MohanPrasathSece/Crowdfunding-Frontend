@@ -59,3 +59,10 @@ istanbul-report/
 # ---- Others ----
 *.bak
 *.tmp
+
+# Allow environment files
+!.env
+!.env.*
+!.env.*.local
+*.bak
+*.tmp

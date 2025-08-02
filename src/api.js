@@ -2,7 +2,7 @@ import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const api = axios.create({
-  baseURL: "https://crowdfunding-backend-2c2d.onrender.com/api",
+  baseURL: process.env.REACT_APP_API_URL || "https://crowdfunding-backend-2c2d.onrender.com/api",
 });
 
 // Request interceptor to add the auth token to every request
